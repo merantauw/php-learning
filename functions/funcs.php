@@ -125,7 +125,7 @@ function get_count(array $arr): ?int
 
 echo get_count($array);*/
 
-function get_table(int $tr, int $td){
+/*function get_table(int $tr, int $td){
     if ($tr > 0 || $td > 0){
         echo '<table border="1" width="100%">';
         $irow = 1;
@@ -141,7 +141,5 @@ function get_table(int $tr, int $td){
         }
         echo '</table>';
     } else{echo 'Одно из значений отрицательное либо равно 0. Замените';}
+}*/
 
-}
-
-get_table(12,7);
