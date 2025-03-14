@@ -1,4 +1,26 @@
-<?php error_reporting (-1); ?>
+<?php error_reporting (-1);
+
+/*$x = '1';
+if (isset($x)){
+    echo $x . '<br>';
+};
+
+if (empty($x)){
+  echo 'x is empty';
+};*/
+
+/*if (!empty($_POST['agree'])){
+    info($_POST);
+}*/
+
+/*if (isset($_POST['send-form'])){
+    echo 'Была отправлена первая форма';
+}
+if (isset($_GET['search-form'])){
+    echo 'Была отправлена вторая форма';
+}*/
+
+?>
 
 <!doctype html>
 <html lang="ru">
@@ -10,19 +32,27 @@
     <title>Document</title>
 </head>
 <body>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate id mollitia neque velit?
-    Ad consectetur cumque dolorum eius et fugit harum impedit, incidunt quasi ratione rerum sint, sunt, ullam?
-</p>
 
-<?php $nums = [1,2,3,4,5]; ?>
+<form action="index.php" method="post">
+    <p>Имя:<input type="text" name="name"></p>
+    <p>Почта:<input type="email" name="email"></p>
+    <p>Я согласен с политикой конфиденциальности<input type="checkbox" name="agree"></p>
+    <p><button type="submit" name="send-form">Отправить</button></p>
+</form>
+<hr>
 
-<?php foreach($nums as $num): ?>
-<?php echo '<p>' . $num . '</p>'; ?>
-<?php endforeach; ?>
+<?php
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquam, amet aspernatur deserunt eaque esse facere ipsa magnam modi nulla numquam omnis optio porro quisquam quos sint tempore voluptas!
-</p>
+ if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['agree'])){
+     echo '<p>Вы не заполнили все обязательные поля</p>';
+ } else {
+     echo '<p>Вы ввели имя: ' . $_POST['name'] . '.</p>';
+     echo '<p>Ваша почта: ' . $_POST['email'] . '.</p>';
+     echo '<p>Вы согласились с политикой конфиденциальности</p>';
+ }
 
+
+?>
 
 </body>
 </html>
