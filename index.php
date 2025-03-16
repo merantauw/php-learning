@@ -1,23 +1,18 @@
 <?php error_reporting (-1);
 
-if (!(empty($_FILES))){
-    echo '<pre>';
-    print_r($_FILES);
-    echo '</pre>';
-    if (move_uploaded_file($_FILES['file']['tmp_name'], 'upload/' . $_FILES['file']['name'])){
-        echo 'Success';
-    } else {
-        echo 'Error';
-    }
-}
+session_start();
 
-//echo $_SERVER['PHP_SELF'];
-//echo $_SERVER['SERVER_NAME'];
-//echo '<p>' . $_SERVER['QUERY_STRING'] . '</p>';
-/*if (!empty($_SERVER['HTTP_REFERER'])){
-    echo $_SERVER['HTTP_REFERER'];
-}*/
+//$_SESSION['test'] = 123;
+
+$_SESSION['count'] = isset($_SESSION['count']) ? ++$_SESSION['count'] : 1;
+
+//echo 'Вы посещали эту страницу ' . $_SESSION['count'] . ' раз';
+
+var_dump($_SESSION);
+
+unset($_SESSION['count'], $_SESSION['test']);
 ?>
+
 
 <!doctype html>
 <html lang="ru">
@@ -31,10 +26,7 @@ if (!(empty($_FILES))){
 </head>
 <body>
 
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <button type="Submit" value="send">Отправить</button>
-</form>
+<a href="index2.php">index 2</a>
 
 </body>
 </html>
