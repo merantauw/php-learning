@@ -1,25 +1,22 @@
 <?php error_reporting (-1);
 
-/*$x = '1';
-if (isset($x)){
-    echo $x . '<br>';
-};
-
-if (empty($x)){
-  echo 'x is empty';
-};*/
-
-/*if (!empty($_POST['agree'])){
-    info($_POST);
-}*/
-
-/*if (isset($_POST['send-form'])){
-    echo 'Была отправлена первая форма';
+if (!(empty($_FILES))){
+    echo '<pre>';
+    print_r($_FILES);
+    echo '</pre>';
+    if (move_uploaded_file($_FILES['file']['tmp_name'], 'upload/' . $_FILES['file']['name'])){
+        echo 'Success';
+    } else {
+        echo 'Error';
+    }
 }
-if (isset($_GET['search-form'])){
-    echo 'Была отправлена вторая форма';
-}*/
 
+//echo $_SERVER['PHP_SELF'];
+//echo $_SERVER['SERVER_NAME'];
+//echo '<p>' . $_SERVER['QUERY_STRING'] . '</p>';
+/*if (!empty($_SERVER['HTTP_REFERER'])){
+    echo $_SERVER['HTTP_REFERER'];
+}*/
 ?>
 
 <!doctype html>
@@ -29,30 +26,15 @@ if (isset($_GET['search-form'])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
     <title>Document</title>
 </head>
 <body>
 
-<form action="index.php" method="post">
-    <p>Имя:<input type="text" name="name"></p>
-    <p>Почта:<input type="email" name="email"></p>
-    <p>Я согласен с политикой конфиденциальности<input type="checkbox" name="agree"></p>
-    <p><button type="submit" name="send-form">Отправить</button></p>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="Submit" value="send">Отправить</button>
 </form>
-<hr>
-
-<?php
-
- if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['agree'])){
-     echo '<p>Вы не заполнили все обязательные поля</p>';
- } else {
-     echo '<p>Вы ввели имя: ' . $_POST['name'] . '.</p>';
-     echo '<p>Ваша почта: ' . $_POST['email'] . '.</p>';
-     echo '<p>Вы согласились с политикой конфиденциальности</p>';
- }
-
-
-?>
 
 </body>
 </html>
