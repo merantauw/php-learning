@@ -1,32 +1,27 @@
-<?php error_reporting (-1);
+<?php
 
-session_start();
+error_reporting(-1);
 
-//$_SESSION['test'] = 123;
+//echo '<pre>';
+//print_r($_COOKIE);
+//echo '<pre>';
+/*
+setcookie('test1', 'TEST 1', path: '/');
+//setcookie('test2', 'TEST 2', ['path' => '/', 'expires' => time()+10]);
+setcookie('test3', 'TEST 3', path: '/', expires_or_options: time()+3600);
 
-$_SESSION['count'] = isset($_SESSION['count']) ? ++$_SESSION['count'] : 1;
+setcookie('test1', '', path: '/');
+setcookie('test3', '', ['path' => '/', 'expires' => time()-3600]);*/
 
-//echo 'Вы посещали эту страницу ' . $_SESSION['count'] . ' раз';
+if (isset($_GET['do']) && $_GET['do'] === 'reset') {
+    setcookie('count', '', time() - 3600, '/');
+    header('Location: index.php');
+    exit;
+}
 
-var_dump($_SESSION);
 
-unset($_SESSION['count'], $_SESSION['test']);
-?>
+isset($_COOKIE['count']) ? setcookie('count', ++$_COOKIE['count'], time() + 3600, '/') : setcookie('count', 1, time() + 3600, '/');
 
+echo 'Вы посещали страницу ' . ($_COOKIE['count'] ?? 1) . ' раз';
 
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
-    <title>Document</title>
-</head>
-<body>
-
-<a href="index2.php">index 2</a>
-
-</body>
-</html>
+echo '<p><a href="?do=reset">Сбросить счетчик</a></p>';
