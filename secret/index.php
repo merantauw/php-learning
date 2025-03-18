@@ -4,10 +4,10 @@ error_reporting(-1);
 session_start();
 
 $login = 'admin';
-$password = '123';
+$password = '$2y$10$dGHBjz4gu7qGGfwAHosTIuWdRDVor26OShnEAYYbquISWwwTunHay';
 
 if (!empty($_POST)){
-    if ($_POST['login'] == $login && $_POST['password'] == $password){
+    if ($_POST['login'] == $login && password_verify($_POST['password'], $password)){
         $_SESSION['auth'] = 1;
         $_SESSION['res'] = 'success';
         header('Location: secret.php');
